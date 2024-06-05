@@ -18,7 +18,11 @@
             margin: 0;
 
         .container {
+
             max-width: 402px;
+
+            max-width: 400px;
+
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
