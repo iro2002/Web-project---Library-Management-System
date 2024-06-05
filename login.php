@@ -30,7 +30,7 @@ if(isset($_SESSION['loggedInStatus'])){
         }
         .login-card {
             padding: 30px;
-            border-radius: 30px;
+            border-radius: 31px;
         }
         .login-btn {
             background-color: #6677BC ;
