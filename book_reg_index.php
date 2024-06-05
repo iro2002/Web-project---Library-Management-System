@@ -16,8 +16,8 @@ require 'book_req_pros.php';
             margin: 0;
             padding: 0;
             display: flex;
-            height: 100vh;
-            width: : 110vh;
+            height: 120vh;
+        
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
         }
@@ -120,31 +120,7 @@ require 'book_req_pros.php';
             background-color: #0056b3;
         }
 
-        .dark-mode-toggle {
-            background: #343a40;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-      
-
-      
-
-        .dark-mode-toggle:hover {
-            background: #1d2124;
-        }
-
-        .dark-mode {
-            background: #121212;
-            color: #ffffff;
-        }
-
-        .dark-mode .main-content {
-            background: #1e1e1e;
-            color: #ffffff;
-        }
+        
 
         .content {
             display: flex;
@@ -177,7 +153,7 @@ require 'book_req_pros.php';
             transition: transform 0.3s, box-shadow 0.3s;
             padding-bottom :20px;
         }
-                    .form-container {
+            .form-container {
                 max-width: 500px;
                 margin: 0 auto;
                 padding: 20px;
@@ -355,6 +331,44 @@ require 'book_req_pros.php';
             border-radius: 5px;
 
         }
+            .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            border-radius:6px;
+            }
+
+            .dropdown {
+            position: relative;
+            display: inline-block;
+            }
+
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+
+            .dropdown-content a {
+            color: black;
+            padding: 5px 16px;
+            text-decoration: none;
+            display: block;
+            }
+
+            .dropdown-content a:hover {background-color: #ddd;}
+
+            .dropdown:hover .dropdown-content {display: block;}
+
+            .dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+</head>
+<body style="background-color:white;">
     </style>
 </head>
 <body>
@@ -365,9 +379,9 @@ require 'book_req_pros.php';
             </div>
             <ul class="nav-list">
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href=""><i class="fas fa-users"></i> Manage Users</a></li>
-                <li><a href=""><i class="fas fa-book"></i> Add Books</a></li>
-                <li><a href=""><i class="fas fa-list"></i> Add Book Category</a></li>
+                <li><a href="manageuser_index.php"><i class="fas fa-users"></i> Manage Users</a></li>
+                <li><a href="book_reg_index.php"><i class="fas fa-book"></i> Add Books</a></li>
+                <li><a href="book_cateogary_index.php"><i class="fas fa-list"></i> Add Book Category</a></li>
                 <li><a href="member_req_index.php"><i class="fas fa-cog"></i> Member registration</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
@@ -379,10 +393,21 @@ require 'book_req_pros.php';
                     <input type="text" placeholder="Search...">
                     <button type="button">Search</button>
                 </div>
-                <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+              
             </header>
+            <?php if (isset($_SESSION['message'])): ?>
+                    <div>
+                        <?php 
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        ?>
+                       
+                    </div>
+                <?php endif; ?>
             <section class="content">
+                
                 <div class="card1">
+                <h1>Book Details</h1>
                     <div class="container" style="margin-bottom:5em;">
                         <table class="table table-hover">
                             <thead class="thead-dark">
@@ -424,9 +449,9 @@ require 'book_req_pros.php';
                     <div>
                         <div>
                             <?php if ($update == true): ?>
-                                <h3 style="color:; background-color:#257FBE;">Edit Member</h3>
+                                <h3 style="color:; background-color:#257FBE;">Edit Book</h3>
                             <?php else: ?>
-                                <h3 style="color:; background-color:#257FBE;">Add Member</h3>
+                                <h3 style="color:; background-color:#257FBE;">Add Book</h3>
                             <?php endif; ?>
                         </div>
                         <script>
@@ -458,33 +483,44 @@ require 'book_req_pros.php';
                 <div id="error-message" class="error-message" style="color: red;"></div>
                 <div id="success-message" class="success-message" style="color: green;"></div>
                 
-             <form action="book_req_pros.php" method="post" onsubmit="return validateForm();">
-                    <div class="form-group">
-                        <label for="memberid">Book ID</label>
-                        <input type="text" id="book_id" name="book_id" value="<?php echo $book_id; ?>" class="form-control" required>
+                <form action="book_req_pros.php" method="POST">
+                <div class="form-group">
+                         <label>Book ID</label>
+                    <input type="text" name="book_id" value="<?php echo $book_id; ?>">
+                <div>
+                <div class="form-group">
+                        <label>Book Name</label>
+                        <input type="text" name="book_name" value="<?php echo $book_name; ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="book_name">Book Name</label>
-                        <input type="text" id="book_name" name="book_name" value="<?php echo $book_name; ?>" class="form-control" required>
-                    </div>
-                    <<div class="form-group">
-         
-                    
+
+                   <div class="form-group">
+                        <label>Category</label>
+                        <select name="category_id">
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?php echo $category['category_id']; ?>" <?php if ($category_id == $category['category_id']) echo 'selected'; ?>>
+                                    <?php echo $category['category_name']; ?>
+                                </option>
+                            <?php endforeach; ?>
+        </select>
+    </div>
+   
+
+                <br>
+                <br>
+                <div class="form-group">
                     <?php if ($update == true): ?>
                         <button type="submit" name="update" class="btn btn-warning">Update</button>
                     <?php else: ?>
                         <button type="submit" name="save" class="btn btn-primary">Save</button>
                     <?php endif; ?>
-                </form>
+                </div>
+            </form>
+
             </div>
         </section>
     </div>
     
 
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
+  
 </body>
 </html>
