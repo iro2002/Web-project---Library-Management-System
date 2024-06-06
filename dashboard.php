@@ -240,7 +240,7 @@ require 'dbcon.php';
                             if ($result_set) {
                                 echo mysqli_num_rows($result_set); // Change $result to $result_set
                             }
-                         ?></h1>
+                         ?>
                 </div>
                 <div class="card">
                     <h3>Total Users</h3>
@@ -255,14 +255,31 @@ require 'dbcon.php';
                     </h1>
                 </div>
                 <div class="card">
-                    <h3>Registerd Members</h3>
-                    <h1><?php
-                    $query = "SELECT * FROM member"; // Add a semicolon at the end of the statement
+                    <h3>Total Users</h3>
+                    <h1>
+                   <?php
+                    $query = "SELECT * FROM user"; // Add a semicolon at the end of the statement
                     $result_set = mysqli_query($database, $query);
                     if ($result_set) {
                         echo mysqli_num_rows($result_set); // Change $result to $result_set
                     }
-                    ?></h2>
+                    ?>
+                    </h1>
+                </div>
+                <div class="card">
+                    <h3>Total Book Category</h3>
+                    <h1>
+                   <?php
+                    $query = "SELECT * FROM bookcategory "; // Add a semicolon at the end of the statement
+                    $result_set = mysqli_query($database, $query);
+                    if ($result_set) {
+                        echo mysqli_num_rows($result_set); // Change $result to $result_set
+                    }
+                    ?>
+                    </h1>
+                </div>
+               
+                
                 </div>
             </section>
         </div>
