@@ -262,6 +262,82 @@ require 'member_reg_pros.php';
                 padding: 10px;
             }  
         }
+    /* Updated CSS style for Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 5px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        
+    }
+
+    table th {
+        background-color: #257FBE;
+        color: white;
+        
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+        border-radius: 5px;
+    }
+
+    
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+    h3 {
+        padding: 8px;
+        border-radius: 5px;
+
+    }
+    .errormassage{
+       
+       color: #721c24;
+    
+       font-family: Arial, sans-serif;
+       font-size: 24px;
+   }
 </style>
 <body>
     <div class="container">
@@ -353,6 +429,32 @@ require 'member_reg_pros.php';
                                 <h3 style="color:; background-color:#257FBE;">Add Member</h3>
                             <?php endif; ?>
                         </div>
+                        <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const memberID = document.getElementById('memberid').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const memberIDPattern = /^M\d{3}$/;
+
+            errorMessage.innerHTML = '';
+            successMessage.innerHTML = '';
+
+            if (!emailPattern.test(email)) {
+                errorMessage.innerHTML = 'Enter valid email';
+                return false;
+            }
+
+            if (!memberIDPattern.test(memberID)) {
+                errorMessage.innerHTML = 'ID format M001.';
+                return false;
+            }
+
+            return true;
+        }
+</script>
 </head>
 <body>
     <div class="container">
