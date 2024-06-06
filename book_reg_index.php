@@ -345,6 +345,13 @@ require 'book_req_pros.php';
             display: inline-block;
             }
 
+            .errormassage{
+           
+           color: #721c24;
+        
+           font-family: Arial, sans-serif;
+           font-size: 24px;}
+
             .dropdown-content {
             display: none;
             position: absolute;
@@ -366,11 +373,13 @@ require 'book_req_pros.php';
             .dropdown:hover .dropdown-content {display: block;}
 
             .dropdown:hover .dropbtn {background-color: #3e8e41;}
+            
 </style>
+
 </head>
-<body style="background-color:white;">
-    </style>
-</head>
+
+  
+
 <body>
     <div class="container">
         <nav class="sidebar">
@@ -395,6 +404,7 @@ require 'book_req_pros.php';
                 </div>
               
             </header>
+            <div class="errormassage">
             <?php if (isset($_SESSION['message'])): ?>
                     <div>
                         <?php 
@@ -404,6 +414,7 @@ require 'book_req_pros.php';
                        
                     </div>
                 <?php endif; ?>
+            </div>
             <section class="content">
                 
                 <div class="card1">
@@ -454,28 +465,8 @@ require 'book_req_pros.php';
                                 <h3 style="color:; background-color:#257FBE;">Add Book</h3>
                             <?php endif; ?>
                         </div>
-                        <script>
-        function validateForm() {
-           
-            const memberID = document.getElementById('book_id').value;
-            const errorMessage = document.getElementById('error-message');
-            const successMessage = document.getElementById('success-message');
+                        
 
-          
-            const bookIDPattern = /^B\d{3}$/;
-
-            errorMessage.innerHTML = '';
-            successMessage.innerHTML = '';
-
-            if (!memberIDPattern.test(book_id)) {
-                errorMessage.innerHTML = 'ID format B001.';
-                return false;
-            }
-
-            return true;
-        }
-    </script>
-</head>
 <body>
     <div class="container">
         <section>
@@ -483,40 +474,57 @@ require 'book_req_pros.php';
                 <div id="error-message" class="error-message" style="color: red;"></div>
                 <div id="success-message" class="success-message" style="color: green;"></div>
                 
-                <form action="book_req_pros.php" method="POST">
-                <div class="form-group">
-                         <label>Book ID</label>
-                    <input type="text" name="book_id" value="<?php echo $book_id; ?>">
-                <div>
-                <div class="form-group">
-                        <label>Book Name</label>
-                        <input type="text" name="book_name" value="<?php echo $book_name; ?>">
+                <form action="book_req_pros.php" method="POST" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label>Book ID</label>
+                        <input type="text" id="book_id" name="book_id" value="<?php echo $book_id; ?>" required>
                     </div>
-
-                   <div class="form-group">
+                    <div class="form-group">
+                        <label>Book Name</label>
+                        <input type="text" name="book_name" value="<?php echo $book_name; ?>" required>
+                    </div>
+                    <div class="form-group">
                         <label>Category</label>
-                        <select name="category_id">
+                        <select name="category_id" required>
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?php echo $category['category_id']; ?>" <?php if ($category_id == $category['category_id']) echo 'selected'; ?>>
                                     <?php echo $category['category_name']; ?>
                                 </option>
                             <?php endforeach; ?>
-        </select>
-    </div>
-   
-
-                <br>
-                <br>
-                <div class="form-group">
-                    <?php if ($update == true): ?>
-                        <button type="submit" name="update" class="btn btn-warning">Update</button>
-                    <?php else: ?>
-                        <button type="submit" name="save" class="btn btn-primary">Save</button>
-                    <?php endif; ?>
-                </div>
-            </form>
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <?php if ($update == true): ?>
+                            <button type="submit" name="update" class="btn btn-warning">Update</button>
+                        <?php else: ?>
+                            <button type="submit" name="save" class="btn btn-primary">Save</button>
+                        <?php endif; ?>
+                    </div>
+                </form
 
             </div>
+            <script>
+                function validateForm() {
+                const bookID = document.getElementById('book_id').value;
+                const errorMessage = document.getElementById('error-message');
+                const successMessage = document.getElementById('success-message');
+
+                const bookIDPattern = /^B\d{3}$/;
+
+                errorMessage.innerHTML = '';
+                successMessage.innerHTML = '';
+
+                if (!bookIDPattern.test(bookID)) {
+                    errorMessage.innerHTML = 'Book ID B001';
+                    return false;
+                }
+
+              return true;
+            }
+                </script>
+
         </section>
     </div>
     
