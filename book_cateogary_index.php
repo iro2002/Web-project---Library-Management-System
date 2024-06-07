@@ -365,8 +365,13 @@ require 'book_cateogary_pros.php';
                 </div>
                 
             </header>
-       
-           
+            <div class = "errormassage">
+            <?php if (isset($_SESSION['message'])): ?>
+                    <div>
+                        <?php 
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif; ?>
@@ -434,7 +439,29 @@ require 'book_cateogary_pros.php';
                             <?php endif; ?>
                         </div>
                         <script>
-       
+        function validateForm() {
+            const categoryID = document.getElementById('category_id').value;
+            
+            const dateModified = document.getElementById('date_modified').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            errorMessage.innerHTML = '';
+            successMessage.innerHTML = '';
+
+            // Validate Category ID (example pattern: "C001")
+            const categoryIDPattern = /^C\d{3}$/;
+            if (!categoryIDPattern.test(categoryID)) {
+                errorMessage.innerHTML = 'Category ID C001';
+                return false;
+            }
+
+            
+
+            successMessage.innerHTML = 'Form is valid. Submitting...';
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
