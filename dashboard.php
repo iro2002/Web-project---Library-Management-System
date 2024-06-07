@@ -76,7 +76,20 @@ require 'dbcon.php';
             padding: 20px;
             background: #f4f4f4;
         }
-
+        .time-display {
+            font-size: 2em;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: red;
+            padding: 10px 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            border-color: green;
+            background-color: #f9f9f9;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+        }
         .header {
             display: flex;
             justify-content: space-between;
@@ -217,8 +230,8 @@ require 'dbcon.php';
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="manageuser_index.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="book_reg_index.php"><i class="fas fa-book"></i> Add Books</a></li>
-                <li><a href=""><i class="fas fa-list"></i> Add Book Category</a></li>
-                <li><a href="member_req_index.php"><i class="fas fa-cog"></i> Member registration</a></li>
+                <li><a href="book_cateogary_index.php"><i class="fas fa-list"></i> Add Book Category</a></li>
+                <li><a href="member_req_index.php"><i class="fas fa-user-circle"></i> Member registration</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
@@ -231,6 +244,27 @@ require 'dbcon.php';
                 </div>
                 <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
             </header>
+            <time>Time-:<time>
+               
+            <div class="time-display" id="timeDisplay"></div>
+    <script>
+        
+        function updateTime() {
+            const timeDisplay = document.getElementById('timeDisplay');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+            timeDisplay.textContent = currentTime;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+
+        // Initial call to display time immediately
+        updateTime();
+    </script>
             <section class="content">
                 <div class="card">
                     <h3>Total Books</h3>
