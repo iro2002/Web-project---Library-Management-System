@@ -491,9 +491,6 @@ require 'member_reg_pros.php';
                 </form>
             </div>
         </section>
-    </div>
-    
-
-    
+    </div> 
 </body>
 </html>
