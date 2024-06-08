@@ -6,8 +6,8 @@ session_start();
 $update = false;
 $book_id = $book_name = $category_id = "";
 
-// Function to check if Book ID already exists
-function checkBookExistence($database, $book_id) {
+ // Function to check if Book ID already exists
+ function checkBookExistence($database, $book_id) {
     $stmt = $database->prepare("SELECT * FROM book WHERE book_id = ?");
     $stmt->bind_param("s", $book_id);
     $stmt->execute();
@@ -15,10 +15,10 @@ function checkBookExistence($database, $book_id) {
     $exists = $result->num_rows > 0;
     $stmt->close();
     return $exists;
-}
+ }
 
-// Function to fetch all categories
-function fetchCategories($database) {
+ // Function to fetch all categories
+ function fetchCategories($database) {
     $stmt = $database->prepare("SELECT category_id, category_name FROM bookcategory");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -28,13 +28,13 @@ function fetchCategories($database) {
     }
     $stmt->close();
     return $categories;
-}
+ }
 
-// Fetch categories for dropdown menu
-$categories = fetchCategories($database);
+ // Fetch categories for dropdown menu
+ $categories = fetchCategories($database);
 
-// Saving new book details
-if (isset($_POST['save'])) {
+ // Saving new book details
+ if (isset($_POST['save'])) {
     $book_id = $_POST['book_id'];
     $book_name = $_POST['book_name'];
     $category_id = $_POST['category_id'];
@@ -52,10 +52,10 @@ if (isset($_POST['save'])) {
         $_SESSION['msg_type'] = "success";
     }
     header("Location: book_reg_index.php");
-}
+ }
 
-// Deleting a book
-if (isset($_GET['delete'])) {
+ // Deleting a book
+ if (isset($_GET['delete'])) {
     $book_id = $_GET['delete'];
 
     $stmt = $database->prepare("DELETE FROM book WHERE book_id = ?");
@@ -66,10 +66,10 @@ if (isset($_GET['delete'])) {
     $_SESSION['message'] = "Book record has been deleted!";
     $_SESSION['msg_type'] = "danger";
     header("Location: book_reg_index.php");
-}
+ }
 
-// Editing a book
-if (isset($_GET['edit'])) {
+ // Editing a book
+ if (isset($_GET['edit'])) {
     $book_id = $_GET['edit'];
     $update = true;
 
@@ -86,10 +86,10 @@ if (isset($_GET['edit'])) {
     }
 
     $stmt->close();
-}
+ }
 
-// Updating a book
-if (isset($_POST['update'])) {
+ // Updating a book
+ if (isset($_POST['update'])) {
     $book_id = $_POST['book_id'];
     $book_name = $_POST['book_name'];
     $category_id = $_POST['category_id'];
