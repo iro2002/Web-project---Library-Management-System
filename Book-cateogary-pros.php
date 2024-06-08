@@ -8,7 +8,7 @@ $category_id = "";
 $category_Name = "";
 $date_modified = "";
 
-// Function to check if Category ID or Name already exists
+// Function to check if Category ID or Name 
 function checkExistence($database, $category_id, $category_Name) {
     $stmt = $database->prepare("SELECT * FROM bookcategory WHERE category_id = ? OR category_Name = ?");
     $stmt->bind_param("ss", $category_id, $category_Name);
