@@ -20,4 +20,41 @@ function checkExistence($database, $member_id, $email) {
     $stmt->close();
     return $exists;
 }
+// Saving new member details
+if (isset($_POST['save'])) {
+    $member_id = $_POST['member_id'];
+    $first_name = $_POST['firstname'];
+    $last_name = $_POST['lastname'];
+    $birthday = $_POST['birthday'];
+    $email = $_POST['email'];
+
+    if (checkExistence($database, $member_id, $email)) {
+        $_SESSION['message'] = "Member ID or Email already exists!";
+        $_SESSION['msg_type'] = "danger";
+        header("Location: member_req_index.php");
+    } else {
+        $stmt = $database->prepare("INSERT INTO member (member_id, first_name, last_name, birthday, email) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $member_id, $first_name, $last_name, $birthday, $email);
+        $stmt->execute();
+        $stmt->close();
+
+        $_SESSION['message'] = "Record has been saved!";
+        $_SESSION['msg_type'] = "success";
+        header("Location: member_req_index.php");
+    }
+}
+
+// Deleting a member
+if (isset($_GET['delete'])) {
+    $member_id = $_GET['delete'];
+
+    $stmt = $database->prepare("DELETE FROM member WHERE member_id = ?");
+    $stmt->bind_param("s", $member_id);
+    $stmt->execute();
+    $stmt->close();
+
+    $_SESSION['message'] = "Record has been deleted!";
+    $_SESSION['msg_type'] = "danger";
+    header("Location: member_req_index.php");
+}
 ?>
