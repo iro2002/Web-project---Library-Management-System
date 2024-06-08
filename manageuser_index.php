@@ -17,7 +17,7 @@ require 'manageuser_req_pros.php';
             margin: 0;
             padding: 0;
             display: flex;
-            height: 110vh;
+            height: 130vh;
           
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
@@ -358,7 +358,7 @@ require 'manageuser_req_pros.php';
                 <li><a href="manageuser_index.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="book_reg_index.php"><i class="fas fa-book"></i> Add Books</a></li>
                 <li><a href="book_cateogary_index.php"><i class="fas fa-list"></i> Add Book Category</a></li>
-                <li><a href="member_req_index.php"><i class="fas fa-cog"></i> Member Registration</a></li>
+                <li><a href="member_req_index.php"><i class="fas fa-user-circle"></i> Member Registration</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
@@ -369,25 +369,22 @@ require 'manageuser_req_pros.php';
                     <input type="text" placeholder="Search...">
                     <button type="button">Search</button>
                 </div>
-              
             </header>
-            <div class = "errormassage">
-            <?php if (isset($_SESSION['message'])): ?>
-                    <div>
+            <div class="errormassage">
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="">
                         <?php 
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
+                            unset($_SESSION['msg_type']);
                         ?>
-                       
                     </div>
                 <?php endif; ?>
-                
             </div>
             <br>
             <section class="content">
-                
                 <div class="card1">
-                <h1>User Details</h1>
+                    <h1>User Details</h1>
                     <div class="container" style="margin-bottom:5em;">
                         <table class="table table-hover">
                             <thead class="thead-dark">
@@ -430,45 +427,10 @@ require 'manageuser_req_pros.php';
                 <div class="card2">
                     <div>
                         <?php if ($update == true): ?>
-                            <h3 style="color:#fff; background-color:#257FBE;">Edit Member</h3>
+                            <h3 style="color:#fff; background-color:#257FBE;">Edit User</h3>
                         <?php else: ?>
-                            <p style="color:#fff; background-color:red;">You can't Add new user !</p>
+                            <h3 style="color:#fff; background-color:#257FBE;"> Add new User </h3>
                         <?php endif; ?>
-                        <script>
-                        function validateForm() {
-                            const email = document.getElementById('email').value;
-                            const memberID = document.getElementById('user_id').value;
-                            const password = document.getElementById('password').value; // Added this line
-                            const errorMessage = document.getElementById('error-message');
-                            const successMessage = document.getElementById('success-message');
-
-                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                            const memberIDPattern = /^U\d{3}$/;
-
-                            errorMessage.innerHTML = '';
-                            successMessage.innerHTML = '';
-
-                            if (!emailPattern.test(email)) {
-                                errorMessage.innerHTML = 'Enter a valid email';
-                                return false;
-                            }
-
-                            if (!memberIDPattern.test(memberID)) {
-                                errorMessage.innerHTML = 'ID format should be U001.';
-                                return false;
-                            }
-
-                            if (password.length < 8) {
-                                errorMessage.innerHTML = 'PW need 8 characters.';
-                                
-                                return false;
-                            }
-
-                            successMessage.innerHTML = 'Validation successful!';
-                            return true;
-                        }
-                        </script>
-
                     </div>
                     <div class="container">
                         <section>
@@ -489,20 +451,22 @@ require 'manageuser_req_pros.php';
                                         <input type="text" id="lastname" name="lastname" value="<?php echo $last_name; ?>" class="form-control" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="username">User Name</label>
+                                        <input type="text" id="username" name="username" value="<?php echo $username; ?>" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" id="password" name="password" value="<?php echo $password; ?>" class="form-control" required>
+                                        <input type="password" id="password" name="password" placeholder="Enter Password" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
                                         <input type="text" id="email" name="email" value="<?php echo $email; ?>" class="form-control" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="username">User Name</label>
-                                        <input type="text" id="username" name="username" value="<?php echo $username; ?>" class="form-control" required>
-                                    </div>
+                                    
                                     <?php if ($update == true): ?>
                                         <button type="submit" name="update" class="btn btn-warning">Update</button>
                                     <?php else: ?>
+                                        <button type="submit" name="save" class="btn btn-primary">Save</button>
                                     <?php endif; ?>
                                 </form>
                             </div>
@@ -510,9 +474,49 @@ require 'manageuser_req_pros.php';
                     </div>
                 </div>
             </section>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validateForm() {
+            let userID = document.getElementById("user_id").value;
+            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
+            let username = document.getElementById("username").value;
+            let errors = [];
+
+            // Validate User ID format
+            const userIDPattern = /^U\d{3}$/;
+            if (!userIDPattern.test(userID)) {
+                errors.push("User Format U001");
+            }
+
+            // Validate password length
+            if (password.length < 8) {
+                errors.push("PW must be more than 8 characters.");
+            }
+
+            // Validate email format
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                errors.push("Invalid email format.");
+            }
+
+            // Display errors in the form
+            let errorMessagesDiv = document.getElementById("error-message");
+            errorMessagesDiv.innerHTML = "";
+            if (errors.length > 0) {
+                errors.forEach(error => {
+                    let errorDiv = document.createElement("div");
+                    errorDiv.className = "alert alert-warning";
+                    errorDiv.innerText = error;
+                    errorMessagesDiv.appendChild(errorDiv);
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
         </div>
     </div>
-
-    
 </body>
 </html>
