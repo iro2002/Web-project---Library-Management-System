@@ -430,6 +430,32 @@ require 'member_reg_pros.php';
                                 <h3 style="color:; background-color:#257FBE;">Add Member</h3>
                             <?php endif; ?>
                         </div>
+        <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const memberID = document.getElementById('memberid').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const memberIDPattern = /^M\d{3}$/;
+
+            errorMessage.innerHTML = '';
+            successMessage.innerHTML = '';
+
+            if (!emailPattern.test(email)) {
+                errorMessage.innerHTML = 'Enter valid email';
+                return false;
+            }
+
+            if (!memberIDPattern.test(memberID)) {
+                errorMessage.innerHTML = 'ID format M001.';
+                return false;
+            }
+
+            return true;
+        }
+</script>
 </head>
 <body>
     <div class="container">
@@ -466,6 +492,7 @@ require 'member_reg_pros.php';
                 </form>
             </div>
         </section>
-    </div>  
+    </div>
+
 </body>
 </html>
