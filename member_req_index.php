@@ -10,7 +10,6 @@ require 'member_reg_pros.php';
     <title>Library Management Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <style>
         /* Updated Admin Panel CSS */
         body {
@@ -201,7 +200,7 @@ require 'member_reg_pros.php';
                 transition: background-color 0.3s ease-in-out;
             }
 
-                            .btn:hover {
+            .btn:hover {
                     background-color: #0056b3;
                 }
             .btn {
@@ -263,6 +262,83 @@ require 'member_reg_pros.php';
                 padding: 10px;
             }
         }
+    /* CSS for table and form */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 5px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        
+    }
+
+    table th {
+        background-color: #257FBE;
+        color: white;
+        
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+        border-radius: 5px;
+    }
+
+    
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+    }
+    h3 {
+        padding: 8px;
+        border-radius: 5px;
+
+    }
+    .errormassage{
+       
+       color: #721c24;
+    
+       font-family: Arial, sans-serif;
+       font-size: 24px;
+
+   }
 </style>
 <body>
     <div class="container">
