@@ -16,7 +16,7 @@ require 'book_req_pros.php';
             margin: 0;
             padding: 0;
             display: flex;
-            height: 120vh;
+            height: 130vh;
         
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
@@ -373,6 +373,35 @@ require 'book_req_pros.php';
             .dropdown:hover .dropdown-content {display: block;}
 
             .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+            .form-dropdown {
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-dropdown label {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.form-dropdown select {
+    padding: 0.5em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.form-dropdown select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-dropdown select option {
+    padding: 0.5em;
+}
             
 </style>
 
@@ -391,7 +420,7 @@ require 'book_req_pros.php';
                 <li><a href="manageuser_index.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="book_reg_index.php"><i class="fas fa-book"></i> Add Books</a></li>
                 <li><a href="book_cateogary_index.php"><i class="fas fa-list"></i> Add Book Category</a></li>
-                <li><a href="member_req_index.php"><i class="fas fa-cog"></i> Member registration</a></li>
+                <li><a href="member_req_index.php"><i class="fas fa-user-circle"></i> Member registration</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
@@ -483,7 +512,7 @@ require 'book_req_pros.php';
                         <label>Book Name</label>
                         <input type="text" name="book_name" value="<?php echo $book_name; ?>" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-dropdown">
                         <label>Category</label>
                         <select name="category_id" required>
                             <?php foreach ($categories as $category): ?>
