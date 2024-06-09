@@ -16,7 +16,7 @@ require 'dbcon.php';
             margin: 0;
             padding: 0;
             display: flex;
-            height: 100vh;
+            height: 101vh;
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
         }
@@ -165,7 +165,7 @@ require 'dbcon.php';
         .card {
             background: #fff;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 16px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             flex: 1 1 calc(25% - 20px);
             display: flex;
