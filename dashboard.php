@@ -80,7 +80,7 @@ require 'dbcon.php';
             font-size: 2em;
             font-family: Arial, sans-serif;
             margin: 20px;
-            color: red;
+            color: #3F414B;
             padding: 10px 20px;
             border: 2px solid #ccc;
             border-radius: 5px;
@@ -289,10 +289,10 @@ require 'dbcon.php';
                     </h1>
                 </div>
                 <div class="card">
-                    <h3>Total Users</h3>
+                    <h3>Total Members</h3>
                     <h1>
                    <?php
-                    $query = "SELECT * FROM user"; // Add a semicolon at the end of the statement
+                    $query = "SELECT * FROM member"; // Add a semicolon at the end of the statement
                     $result_set = mysqli_query($database, $query);
                     if ($result_set) {
                         echo mysqli_num_rows($result_set); // Change $result to $result_set
