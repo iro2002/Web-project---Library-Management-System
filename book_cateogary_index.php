@@ -351,8 +351,8 @@ require 'book_cateogary_pros.php';
             <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="manageuser_index.php"><i class="fas fa-users"></i> Manage Users</a></li>
                 <li><a href="book_reg_index.php"><i class="fas fa-book"></i> Add Books</a></li>
-                <li><a href=""><i class="fas fa-list"></i> Add Book Category</a></li>
-                <li><a href="member_req_index.php"><i class="fas fa-cog"></i> Member registration</a></li>
+                <li><a href="book_cateogary_index.php"><i class="fas fa-list"></i> Add Book Category</a></li>
+                <li><a href="member_req_index.php"><i class="fas fa-user-circle"></i> Member registration</a></li>
                 <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
@@ -433,9 +433,9 @@ require 'book_cateogary_pros.php';
                     <div>
                         <div>
                             <?php if ($update == true): ?>
-                                <h3 style="color:; background-color:#257FBE;">Edit Member</h3>
+                                <h3 style="color:; background-color:#257FBE;">Edit Category</h3>
                             <?php else: ?>
-                                <h3 style="color:; background-color:#257FBE;">Add Member</h3>
+                                <h3 style="color:; background-color:#257FBE;">Add Category</h3>
                             <?php endif; ?>
                         </div>
                         <script>
