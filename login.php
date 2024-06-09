@@ -25,12 +25,12 @@ if(isset($_SESSION['loggedInStatus'])){
             margin: 0;
         }
         .login-container {
-            margin-bottom: 100px;
+            margin-bottom: 101px;
             width:950px;
         }
         .login-card {
             padding: 30px;
-            border-radius: 31px;
+            border-radius: 30px;
         }
         .login-btn {
             background-color: #6677BC ;
