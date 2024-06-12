@@ -8,6 +8,8 @@ require 'dbcon.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Updated Admin Panel CSS */
 
@@ -80,7 +82,7 @@ require 'dbcon.php';
             font-size: 2em;
             font-family: Arial, sans-serif;
             margin: 20px;
-            color: red;
+            color: #3F414B;
             padding: 10px 20px;
             border: 2px solid #ccc;
             border-radius: 5px;
@@ -93,68 +95,23 @@ require 'dbcon.php';
         .header {
             display: flex;
             justify-content: space-between;
-            margin-top:0px;
             align-items: center;
-            padding: 36px 20px;
+            padding: 20px 30px;
             font-weight: bold;
-            margin-bottom: 20px; 
-            background-color:#495057;
-            font-size: 80px;
+            margin-bottom: 20px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .search-bar button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-
-        .dark-mode-toggle {
-            background: #343a40;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .dark-mode-toggle:hover {
-            background: #1d2124;
-        }
-
-        .dark-mode {
-            background: #121212;
-            color: #ffffff;
-        }
-
-        .dark-mode .main-content {
-            background: #1e1e1e;
-            color: #ffffff;
-        }
 
         .content {
             display: flex;
@@ -216,14 +173,14 @@ require 'dbcon.php';
 
             .main-content {
                 padding: 10px;
-            }
-        }
+ 
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="sidebar">
             <div class="sidebar-header">
+            <h2><h2><img src="images/logo.PNG" alt="the logo"  width="140px" height="140px"  ></h2>
                 <h2>Admin Panel</h2>
             </div>
             <ul class="nav-list">
@@ -238,13 +195,10 @@ require 'dbcon.php';
         <div class="main-content">
             <header class="header">
                 <h1 style="font-size:35px">Library Management System</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                    <button type="button">Search</button>
-                </div>
-                <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+                
+                
             </header>
-            <time>Time-:<time>
+          
                
             <div class="time-display" id="timeDisplay"></div>
     <script>
@@ -269,10 +223,10 @@ require 'dbcon.php';
                 <div class="card">
                     <h3>Total Books</h3>
                          <h1><?php
-                            $query = "SELECT * FROM book"; // Add a semicolon at the end of the statement
+                            $query = "SELECT * FROM book"; 
                             $result_set = mysqli_query($database, $query);
                             if ($result_set) {
-                                echo mysqli_num_rows($result_set); // Change $result to $result_set
+                                echo mysqli_num_rows($result_set);
                             }
                          ?>
                 </div>
@@ -280,22 +234,22 @@ require 'dbcon.php';
                     <h3>Total Users</h3>
                     <h1>
                    <?php
-                    $query = "SELECT * FROM user"; // Add a semicolon at the end of the statement
+                    $query = "SELECT * FROM user"; 
                     $result_set = mysqli_query($database, $query);
                     if ($result_set) {
-                        echo mysqli_num_rows($result_set); // Change $result to $result_set
+                        echo mysqli_num_rows($result_set); 
                     }
                     ?>
                     </h1>
                 </div>
                 <div class="card">
-                    <h3>Total Users</h3>
+                    <h3>Total Members</h3>
                     <h1>
                    <?php
-                    $query = "SELECT * FROM user"; // Add a semicolon at the end of the statement
+                    $query = "SELECT * FROM member"; 
                     $result_set = mysqli_query($database, $query);
                     if ($result_set) {
-                        echo mysqli_num_rows($result_set); // Change $result to $result_set
+                        echo mysqli_num_rows($result_set); 
                     }
                     ?>
                     </h1>
@@ -304,10 +258,10 @@ require 'dbcon.php';
                     <h3>Total Book Category</h3>
                     <h1>
                    <?php
-                    $query = "SELECT * FROM bookcategory "; // Add a semicolon at the end of the statement
+                    $query = "SELECT * FROM bookcategory "; 
                     $result_set = mysqli_query($database, $query);
                     if ($result_set) {
-                        echo mysqli_num_rows($result_set); // Change $result to $result_set
+                        echo mysqli_num_rows($result_set); 
                     }
                     ?>
                     </h1>
