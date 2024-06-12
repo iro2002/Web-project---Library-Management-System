@@ -403,6 +403,7 @@ require 'book_req_pros.php';
     <div class="container">
         <nav class="sidebar">
             <div class="sidebar-header">
+            <h2><h2><img src="images/logo.PNG" alt="the logo"  width="140px" height="140px" ></h2>
                 <h2>Admin Panel</h2>
             </div>
             <ul class="nav-list">
@@ -520,13 +521,11 @@ require 'book_req_pros.php';
                     </div>
                     <br>
                     <br>
-                    <div class="form-group">
-                        <?php if ($update == true): ?>
-                           <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
-                        <?php else: ?>
-                           <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
-                        <?php endif; ?>
-                    </div>
+                    <?php if ($update == true): ?>
+                        <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
+                    <?php else: ?>
+                        <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
+                    <?php endif; ?>
                 </form
 
             </div>
