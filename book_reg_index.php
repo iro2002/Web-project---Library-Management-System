@@ -469,7 +469,7 @@ require 'book_req_pros.php';
                                            
                                             <td>
                                                 <a href="book_reg_index.php?edit=<?php echo $row['book_id']; ?>" class="btn btn-success">Edit</a>
-                                                <a href="book_req_pros.php?delete=<?php echo $row['book_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="book_req_pros.php?delete=<?php echo $row['book_id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -522,9 +522,9 @@ require 'book_req_pros.php';
                     <br>
                     <div class="form-group">
                         <?php if ($update == true): ?>
-                            <button type="submit" name="update" class="btn btn-warning">Update</button>
+                           <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
                         <?php else: ?>
-                            <button type="submit" name="save" class="btn btn-primary">Save</button>
+                           <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
                         <?php endif; ?>
                     </div>
                 </form
