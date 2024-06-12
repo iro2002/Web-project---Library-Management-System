@@ -9,15 +9,22 @@ require 'manageuser_req_pros.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+   
+
     <style>
-        /* Updated Admin Panel CSS */
+        /*  CSS */
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            height: 130vh;
+            height: flex;
           
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
@@ -93,32 +100,6 @@ require 'manageuser_req_pros.php';
         .header h1 {
             margin: 0;
             font-size: 24px;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .search-bar button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
         }
 
         
@@ -337,14 +318,45 @@ require 'manageuser_req_pros.php';
             border-radius: 5px;
 
         }
-        .errormassage{
-           
-            color: #721c24;
-         
-            font-family: Arial, sans-serif;
-            font-size: 24px;
-  
+        .custom-alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
         }
+
+        .custom-alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .custom-alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+
+        
     </style>
 </head>
 <body>
@@ -365,22 +377,28 @@ require 'manageuser_req_pros.php';
         <div class="main-content">
             <header class="header">
                 <h1 style="font-size:35px">Library Management System</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                    <button type="button">Search</button>
-                </div>
+               
             </header>
             <div class="errormassage">
-                <?php if (isset($_SESSION['message'])): ?>
-                    <div class="">
-                        <?php 
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                            unset($_SESSION['msg_type']);
-                        ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="
+            custom-alert 
+            <?php 
+                echo ($_SESSION['msg_type'] == 'success') ? 'custom-alert-success' : 'custom-alert-danger'; 
+            ?> 
+            alert-dismissible fade show" role="alert">
+            <?php 
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                unset($_SESSION['msg_type']);
+            ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+</div>
+
             <br>
             <section class="content">
                 <div class="card1">
