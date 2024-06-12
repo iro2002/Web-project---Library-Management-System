@@ -3,13 +3,11 @@ require_once('dbcon.php');
 session_start();
 
 // Initialize variables
-
 $update = false;
 $book_id = $book_name = $category_id = "";
 
-
- // Function to check if Book ID already exists
- function checkBookExistence($database, $book_id) {
+// Function to check if Book ID already exists
+function checkBookExistence($database, $book_id) {
     $stmt = $database->prepare("SELECT * FROM book WHERE book_id = ?");
     $stmt->bind_param("s", $book_id);
     $stmt->execute();
@@ -17,11 +15,10 @@ $book_id = $book_name = $category_id = "";
     $exists = $result->num_rows > 0;
     $stmt->close();
     return $exists;
-  
- }
+}
 
- // Function to fetch all categories
- function fetchCategories($database) {
+// Function to fetch all categories
+function fetchCategories($database) {
     $stmt = $database->prepare("SELECT category_id, category_name FROM bookcategory");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -29,16 +26,15 @@ $book_id = $book_name = $category_id = "";
     while ($row = $result->fetch_assoc()) {
         $categories[] = $row;
     }
-  
     $stmt->close();
     return $categories;
- }
+}
 
- // Fetch categories for the dropdown menu
- $categories = fetchCategories($database);
+// Fetch categories for dropdown menu
+$categories = fetchCategories($database);
 
- // Saving new book details
- if (isset($_POST['save'])) {
+// Saving new book details
+if (isset($_POST['save'])) {
     $book_id = $_POST['book_id'];
     $book_name = $_POST['book_name'];
     $category_id = $_POST['category_id'];
@@ -56,24 +52,31 @@ $book_id = $book_name = $category_id = "";
         $_SESSION['msg_type'] = "success";
     }
     header("Location: book_reg_index.php");
- }
+    exit();
+}
 
- // Deleting a book
- if (isset($_GET['delete'])) {
+// Deleting a book
+if (isset($_GET['delete'])) {
     $book_id = $_GET['delete'];
 
-    $stmt = $database->prepare("DELETE FROM book WHERE book_id = ?");
-    $stmt->bind_param("s", $book_id);
-    $stmt->execute();
-    $stmt->close();
+    if ($book_id == 'B001') {
+        $_SESSION['message'] = "The book with ID 'B001' cannot be deleted!";
+        $_SESSION['msg_type'] = "danger";
+    } else {
+        $stmt = $database->prepare("DELETE FROM book WHERE book_id = ?");
+        $stmt->bind_param("s", $book_id);
+        $stmt->execute();
+        $stmt->close();
 
-    $_SESSION['message'] = "Book record has been deleted!";
-    $_SESSION['msg_type'] = "danger";
+        $_SESSION['message'] = "Book record has been deleted!";
+        $_SESSION['msg_type'] = "danger";
+    }
     header("Location: book_reg_index.php");
- }
+    exit();
+}
 
- // Editing a book
- if (isset($_GET['edit'])) {
+// Editing a book
+if (isset($_GET['edit'])) {
     $book_id = $_GET['edit'];
     $update = true;
 
@@ -90,10 +93,10 @@ $book_id = $book_name = $category_id = "";
     }
 
     $stmt->close();
- }
+}
 
- // Updating a book
- if (isset($_POST['update'])) {
+// Updating a book
+if (isset($_POST['update'])) {
     $book_id = $_POST['book_id'];
     $book_name = $_POST['book_name'];
     $category_id = $_POST['category_id'];
@@ -113,8 +116,9 @@ $book_id = $book_name = $category_id = "";
         $stmt->close();
 
         $_SESSION['message'] = "Book record has been updated!";
-        $_SESSION['msg_type'] = "warning";
+        $_SESSION['msg_type'] = "success";
     }
     header("Location: book_reg_index.php");
+    exit();
 }
 ?>
