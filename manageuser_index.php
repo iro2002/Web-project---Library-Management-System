@@ -24,7 +24,7 @@ require 'manageuser_req_pros.php';
             margin: 0;
             padding: 0;
             display: flex;
-            height: flex;
+            height: 130vh;
           
             background: linear-gradient(135deg, #6677BC, #8ca0e0);
             transition: background 0.3s;
@@ -363,6 +363,7 @@ require 'manageuser_req_pros.php';
     <div class="container">
         <nav class="sidebar">
             <div class="sidebar-header">
+            <h2><h2><img src="images/logo.PNG" alt="the logo"  width="140px" height="140px" ></h2>
                 <h2>Admin Panel</h2>
             </div>
             <ul class="nav-list">
@@ -381,8 +382,7 @@ require 'manageuser_req_pros.php';
             </header>
             <div class="errormassage">
     <?php if (isset($_SESSION['message'])): ?>
-        <div class="
-            custom-alert 
+        <div class="  custom-alert 
             <?php 
                 echo ($_SESSION['msg_type'] == 'success') ? 'custom-alert-success' : 'custom-alert-danger'; 
             ?> 
@@ -429,7 +429,7 @@ require 'manageuser_req_pros.php';
                                             <td><?php echo $row['email']; ?></td>
                                             <td>
                                                 <a href="manageuser_index.php?edit=<?php echo $row['user_id']; ?>" class="btn btn-success">Edit</a>
-                                                <a href="manageuser_index.php?delete=<?php echo $row['user_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="manageuser_index.php?delete=<?php echo $row['user_id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -482,9 +482,9 @@ require 'manageuser_req_pros.php';
                                     </div>
                                     
                                     <?php if ($update == true): ?>
-                                        <button type="submit" name="update" class="btn btn-warning">Update</button>
+                                        <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
                                     <?php else: ?>
-                                        <button type="submit" name="save" class="btn btn-primary">Save</button>
+                                        <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
                                     <?php endif; ?>
                                 </form>
                             </div>
