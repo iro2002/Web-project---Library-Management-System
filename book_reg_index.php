@@ -47,6 +47,25 @@ require 'book_req_pros.php';
             margin: 0;
             font-size: 24px;
         }
+        .custom-alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .custom-alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .custom-alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
 
         .nav-list {
             list-style-type: none;
@@ -82,43 +101,21 @@ require 'book_req_pros.php';
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 36px 20px;
+            padding: 20px 30px;
             font-weight: bold;
             margin-bottom: 20px;
-            background-color: #495057;
-            font-size: 80px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .search-bar button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
 
         
 
@@ -345,13 +342,6 @@ require 'book_req_pros.php';
             display: inline-block;
             }
 
-            .errormassage{
-           
-           color: #721c24;
-        
-           font-family: Arial, sans-serif;
-           font-size: 24px;}
-
             .dropdown-content {
             display: none;
             position: absolute;
@@ -375,33 +365,33 @@ require 'book_req_pros.php';
             .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
             .form-dropdown {
-    margin-bottom: 1em;
-    display: flex;
-    flex-direction: column;
-}
+                margin-bottom: 1em;
+                display: flex;
+                flex-direction: column;
+            }
 
-.form-dropdown label {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-}
+            .form-dropdown label {
+                font-weight: bold;
+                margin-bottom: 0.5em;
+            }
 
-.form-dropdown select {
-    padding: 0.5em;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: border-color 0.3s;
-}
+            .form-dropdown select {
+                padding: 0.5em;
+                font-size: 1em;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #fff;
+                transition: border-color 0.3s;
+            }
 
-.form-dropdown select:focus {
-    border-color: #007bff;
-    outline: none;
-}
+            .form-dropdown select:focus {
+                border-color: #007bff;
+                outline: none;
+            }
 
-.form-dropdown select option {
-    padding: 0.5em;
-}
+            .form-dropdown select option {
+                padding: 0.5em;
+            }
             
 </style>
 
@@ -413,6 +403,7 @@ require 'book_req_pros.php';
     <div class="container">
         <nav class="sidebar">
             <div class="sidebar-header">
+            <h2><h2><img src="images/logo.PNG" alt="the logo"  width="140px" height="140px" ></h2>
                 <h2>Admin Panel</h2>
             </div>
             <ul class="nav-list">
@@ -425,25 +416,32 @@ require 'book_req_pros.php';
             </ul>
         </nav>
         <div class="main-content">
-            <header class="header">
+        <header class="header">
                 <h1 style="font-size:35px">Library Management System</h1>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                    <button type="button">Search</button>
-                </div>
-              
+                
+                
             </header>
+           
             <div class="errormassage">
-            <?php if (isset($_SESSION['message'])): ?>
-                    <div>
-                        <?php 
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                        ?>
-                       
-                    </div>
-                <?php endif; ?>
-            </div>
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="
+            custom-alert 
+            <?php 
+                echo ($_SESSION['msg_type'] == 'success') ? 'custom-alert-success' : 'custom-alert-danger'; 
+            ?> 
+            alert-dismissible fade show" role="alert">
+            <?php 
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                unset($_SESSION['msg_type']);
+            ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+</div>
+            <br>
             <section class="content">
                 
                 <div class="card1">
@@ -472,7 +470,7 @@ require 'book_req_pros.php';
                                            
                                             <td>
                                                 <a href="book_reg_index.php?edit=<?php echo $row['book_id']; ?>" class="btn btn-success">Edit</a>
-                                                <a href="book_req_pros.php?delete=<?php echo $row['book_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="book_req_pros.php?delete=<?php echo $row['book_id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -496,7 +494,6 @@ require 'book_req_pros.php';
                         </div>
                         
 
-<body>
     <div class="container">
         <section>
             <div class="form-container">
@@ -524,13 +521,11 @@ require 'book_req_pros.php';
                     </div>
                     <br>
                     <br>
-                    <div class="form-group">
-                        <?php if ($update == true): ?>
-                            <button type="submit" name="update" class="btn btn-warning">Update</button>
-                        <?php else: ?>
-                            <button type="submit" name="save" class="btn btn-primary">Save</button>
-                        <?php endif; ?>
-                    </div>
+                    <?php if ($update == true): ?>
+                        <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
+                    <?php else: ?>
+                        <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
+                    <?php endif; ?>
                 </form
 
             </div>
