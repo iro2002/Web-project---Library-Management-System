@@ -3,8 +3,10 @@ require_once('dbcon.php');
 session_start();
 
 // Initialize variables
+
 $update = false;
 $book_id = $book_name = $category_id = "";
+
 
  // Function to check if Book ID already exists
  function checkBookExistence($database, $book_id) {
@@ -15,6 +17,7 @@ $book_id = $book_name = $category_id = "";
     $exists = $result->num_rows > 0;
     $stmt->close();
     return $exists;
+  
  }
 
  // Function to fetch all categories
@@ -26,6 +29,7 @@ $book_id = $book_name = $category_id = "";
     while ($row = $result->fetch_assoc()) {
         $categories[] = $row;
     }
+  
     $stmt->close();
     return $categories;
  }
