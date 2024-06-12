@@ -34,7 +34,7 @@ $book_id = $book_name = $category_id = "";
     return $categories;
  }
 
- // Fetch categories for dropdown menu
+ // Fetch categories for the dropdown menu
  $categories = fetchCategories($database);
 
  // Saving new book details
