@@ -20,6 +20,7 @@ function checkExistence($database, $member_id, $email) {
     $stmt->close();
     return $exists;
 }
+
 // Saving new member details
 if (isset($_POST['save'])) {
     $member_id = $_POST['member_id'];
@@ -57,6 +58,7 @@ if (isset($_GET['delete'])) {
     $_SESSION['msg_type'] = "danger";
     header("Location: member_req_index.php");
 }
+
 // Editing a member
 if (isset($_GET['edit'])) {
     $member_id = $_GET['edit'];
@@ -103,7 +105,7 @@ if (isset($_POST['update'])) {
         $stmt->close();
 
         $_SESSION['message'] = "Record has been updated!";
-        $_SESSION['msg_type'] = "warning";
+        $_SESSION['msg_type'] = "success";
         header("Location: member_req_index.php");
     }
     $stmt->close();
