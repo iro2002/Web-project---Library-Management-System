@@ -119,7 +119,7 @@ if (isset($_POST['update'])) {
         $stmt->close();
 
         $_SESSION['message'] = "Record has been updated!";
-        $_SESSION['msg_type'] = "warning";
+        $_SESSION['msg_type'] = "success";
         header("Location: manageuser_index.php");
         exit();
     }
