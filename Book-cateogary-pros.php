@@ -2,13 +2,16 @@
 require_once('dbcon.php');
 session_start();
 
+// Set the default timezone to Sri Lanka
+date_default_timezone_set('Asia/Colombo');
+
 // Initialize variables
 $update = false;
 $category_id = "";
 $category_Name = "";
 $date_modified = "";
 
-// Function to check if Category ID or Name 
+// Function to check if Category ID or Name already exists
 function checkExistence($database, $category_id, $category_Name) {
     $stmt = $database->prepare("SELECT * FROM bookcategory WHERE category_id = ? OR category_Name = ?");
     $stmt->bind_param("ss", $category_id, $category_Name);
@@ -23,7 +26,7 @@ function checkExistence($database, $category_id, $category_Name) {
 if (isset($_POST['save'])) {
     $category_id = $_POST['category_id'];
     $category_Name = $_POST['category_Name'];
-    $date_modified = date("Y-m-d H:i:s"); // Current timestamp
+    $date_modified = date("Y-m-d h:i:s a"); // Current timestamp with AM/PM
 
     if (checkExistence($database, $category_id, $category_Name)) {
         $_SESSION['message'] = "Category ID or Name already exists!";
@@ -45,13 +48,18 @@ if (isset($_POST['save'])) {
 if (isset($_GET['delete'])) {
     $category_id = $_GET['delete'];
 
-    $stmt = $database->prepare("DELETE FROM bookcategory WHERE category_id = ?");
-    $stmt->bind_param("s", $category_id);
-    $stmt->execute();
-    $stmt->close();
+    if ($category_id == 'C001') {
+        $_SESSION['message'] = "The category with ID 'C001' cannot be deleted!";
+        $_SESSION['msg_type'] = "danger";
+    } else {
+        $stmt = $database->prepare("DELETE FROM bookcategory WHERE category_id = ?");
+        $stmt->bind_param("s", $category_id);
+        $stmt->execute();
+        $stmt->close();
 
-    $_SESSION['message'] = "Record has been deleted!";
-    $_SESSION['msg_type'] = "danger";
+        $_SESSION['message'] = "Record has been deleted!";
+        $_SESSION['msg_type'] = "danger";
+    }
     header("Location: book_cateogary_index.php");
     exit();
 }
@@ -80,7 +88,7 @@ if (isset($_GET['edit'])) {
 if (isset($_POST['update'])) {
     $category_id = $_POST['category_id'];
     $category_Name = $_POST['category_Name'];
-    $date_modified = date("Y-m-d H:i:s"); // Current timestamp
+    $date_modified = date("Y-m-d h:i:s a"); // Current timestamp with AM/PM
 
     // Check for existence but allow current category_id and category_Name to pass
     $stmt = $database->prepare("SELECT * FROM bookcategory WHERE (category_id = ? OR category_Name = ?) AND category_id != ?");
@@ -97,7 +105,7 @@ if (isset($_POST['update'])) {
         $stmt->close();
 
         $_SESSION['message'] = "Record has been updated!";
-        $_SESSION['msg_type'] = "warning";
+        $_SESSION['msg_type'] = "success";
     }
     header("Location: book_cateogary_index.php");
     exit();
