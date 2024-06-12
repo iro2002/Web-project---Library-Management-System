@@ -26,6 +26,7 @@ require 'book_cateogary_pros.php';
             display: flex;
             width: 100%;
         }
+        
 
         .sidebar {
             width: 250px;
@@ -331,20 +332,53 @@ require 'book_cateogary_pros.php';
             border-radius: 5px;
 
         }
-        .errormassage{
-           
-           color: #721c24;
         
-           font-family: Arial, sans-serif;
-           font-size: 24px;
- 
-       }
+      
+       .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .custom-alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .custom-alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .custom-alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="sidebar">
             <div class="sidebar-header">
+            <h2><h2><img src="images/logo.PNG" alt="the logo"  width="140px" height="140px" ></h2>
                 <h2>Admin Panel</h2>
             </div>
             <ul class="nav-list">
@@ -360,22 +394,29 @@ require 'book_cateogary_pros.php';
             <header class="header">
                 <h1 style="font-size:35px">Library Management System</h1>
                 <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                    <button type="button">Search</button>
+                   
                 </div>
                 
             </header>
-            <div class = "errormassage">
-            <?php if (isset($_SESSION['message'])): ?>
-                    <div>
-                        <?php 
-                            echo $_SESSION['message'];
-                            unset($_SESSION['message']);
-                        ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endif; ?>
-            </div>
+            <div class="errormassage">
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="
+            custom-alert 
+            <?php 
+                echo ($_SESSION['msg_type'] == 'success') ? 'custom-alert-success' : 'custom-alert-danger'; 
+            ?> 
+            alert-dismissible fade show" role="alert">
+            <?php 
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                unset($_SESSION['msg_type']);
+            ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+</div>
             <br>
             <section class="content">
             <?php if (isset($_SESSION['message'])): ?>
@@ -416,7 +457,7 @@ require 'book_cateogary_pros.php';
                                             
                                             <td>
                                                 <a href="book_cateogary_index.php?edit=<?php echo $row['category_id']; ?>" class="btn btn-success">Edit</a>
-                                                <a href="book_cateogary_pros.php?delete=<?php echo $row['category_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="book_cateogary_pros.php?delete=<?php echo $row['category_id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                         <?php
@@ -484,9 +525,9 @@ require 'book_cateogary_pros.php';
                     </div>
                    
                     <?php if ($update == true): ?>
-                        <button type="submit" name="update" class="btn btn-warning">Update</button>
+                        <button type="submit" name="update" class="btn btn-warning"><strong>Update</strong> <i class="fas fa-retweet"></i></button>
                     <?php else: ?>
-                        <button type="submit" name="save" class="btn btn-primary">Save</button>
+                        <button type="submit" name="save" class="btn btn-primary"><strong>Save </strong><i class="far fa-save"></i></button>
                     <?php endif; ?>
                 </form>
             </div>
